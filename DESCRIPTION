@@ -10,7 +10,7 @@ Authors@R:
            family = "Wu",
            role = c("aut"),
            email = "yhw3@uw.edu"))      
-Description: This package demonstrates functions we’ve written throughout the class.
+Description: Demonstrates functions we’ve written throughout the class.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -30,4 +30,5 @@ Imports:
     randomForest,
     magrittr,
     dplyr,
-    gapminder
+    gapminder,
+    tibble
