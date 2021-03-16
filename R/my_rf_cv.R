@@ -14,8 +14,8 @@
 #'
 #' @export
 my_rf_cv <- function(k) {
-  data(penguins)
-  train <- penguins[,3:6]
+  data(my_penguins)
+  train <- my_penguins[,3:6]
   # Create fold
   fold <- sample(rep(1:k, length = nrow(train)))
   # Create the data set for model
