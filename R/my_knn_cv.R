@@ -15,7 +15,7 @@
 #' \code{cv_err}: a numeric with the cross-validation misclassification error.
 #'
 #' @examples
-#' data(my_penguins)
+#' my_penguins <- na.omit(my_penguins)
 #' my_knn_cv(my_penguins[,3:6], my_penguins$species, 1, 5)
 #'
 #' @export
@@ -32,9 +32,9 @@ my_knn_cv <- function(train, cl, k_nn, k_cv) {
   # Iteration through 1:k_cv
   for (i in 1:k_cv) {
     train_data <- train %>%
-      filter(split != i)
+      filter (split != i)
     test_data <- train %>%
-      filter(split == i)
+      filter (split == i)
     # Predict the class of the ith fold using all other folds as the training data.
     # Save as `class_k`
     class_k <- knn(train_data[,1:4], test_data[,1:4], train_data$y, k_nn)
