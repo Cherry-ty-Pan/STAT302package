@@ -36,12 +36,12 @@ my_knn_cv <- function(train, cl, k_nn, k_cv) {
       dplyr::filter(split == i)
     # Predict the class of the ith fold using all other folds as the training data.
     # Save as `class_k`
-    class_k <- knn(train_data[,1:4], test_data[,1:4], train_data$y, k_nn)
+    class_k <- class::knn(train_data[,1:4], test_data[,1:4], train_data$y, k_nn)
     # record the prediction and the misclassification rate
     # Save as `cv_err`
     predict_err[i] <- sum(class_k != test_data$y)/nrow(test_data)
   }
-  class <- knn(train[,1:4], train[,1:4], train$y, k_nn)
+  class <- class::knn(train[,1:4], train[,1:4], train$y, k_nn)
   # Create the list with `class` and `cv_err`
   outputlist <- list("class" = class,
                      "cv_err" = mean(predict_err))
