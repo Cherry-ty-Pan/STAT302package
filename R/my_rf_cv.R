@@ -36,7 +36,7 @@ my_rf_cv <- function(k) {
     # covariates bill_length_mm, bill_depth_mm, and flipper_length_mm
     random_model <- randomForest::randomForest(body_mass_g ~ x.bill_length_mm + x.bill_depth_mm + x.flipper_length_mm, data = train_data, ntree = 100)
     # predict the body_mass_g of the ith fold which was not used as training data
-    prediction <- class::predict(random_model, test_data[, -4])
+    prediction <- predict(random_model, test_data[, -4])
     # evaluate the MSE
     mse <- mean((prediction - test_data$body_mass_g)^2)
   }
