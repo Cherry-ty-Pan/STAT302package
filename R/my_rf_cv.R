@@ -28,10 +28,10 @@ my_rf_cv <- function(k) {
   for (i in 1:k) {
     # Filter for train data
     train_data <- train %>%
-      filter(split != i)
+      dplyr::filter(split != i)
     # Filter for test data
     test_data <- train %>%
-      filter(split == i)
+      dplyr::filter(split == i)
     # Train a random forest model with 100 trees to predict body_mass_g using
     # covariates bill_length_mm, bill_depth_mm, and flipper_length_mm
     random_model <- randomForest(body_mass_g ~ x.bill_length_mm + x.bill_depth_mm + x.flipper_length_mm, data = train_data, ntree = 100)
