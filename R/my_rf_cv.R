@@ -10,7 +10,6 @@
 #' @return a numeric average MSE across all k folds.
 #'
 #' @examples
-#' data("penguins")
 #' my_rf_cv(5)
 #'
 #' @export

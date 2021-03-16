@@ -25,7 +25,7 @@ a \code{list} with objects:
 This function predict output class using covariates.
 }
 \examples{
-data("penguins")
+data(penguins)
 my_knn_cv(penguins[,3:6], penguins$species, 1, 5)
 
 }

@@ -15,7 +15,7 @@
 #' \code{cv_err}: a numeric with the cross-validation misclassification error.
 #'
 #' @examples
-#' data("penguins")
+#' data(penguins)
 #' my_knn_cv(penguins[,3:6], penguins$species, 1, 5)
 #'
 #' @export

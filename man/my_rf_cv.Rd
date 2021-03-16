@@ -22,7 +22,6 @@ This function will predict output \code{body_mass_g} using covariates \code{bill
 \code{bill_depth_mm}, and \code{flipper_length_mm}.
 }
 \examples{
-data("penguins")
 my_rf_cv(5)
 
 }
