@@ -29,4 +29,5 @@ Imports:
     palmerpenguins,
     randomForest,
     magrittr,
-    dplyr
+    dplyr,
+    gapminder
