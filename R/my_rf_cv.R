@@ -15,11 +15,6 @@
 #'
 #' @export
 my_rf_cv <- function(k) {
-  library(randomForest)
-  library(dplyr)
-  library(tidyverse)
-  library(palmerpenguins)
-  library(class)
   data(penguins)
   train <- penguins[,3:6]
   # Create fold

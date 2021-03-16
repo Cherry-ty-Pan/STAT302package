@@ -20,10 +20,6 @@
 #'
 #' @export
 my_knn_cv <- function(train, cl, k_nn, k_cv) {
-  library(dplyr)
-  library(tidyverse)
-  library(palmerpenguins)
-  library(class)
   # Define fold
   fold <- sample(rep(1:k_cv, length = nrow(train)))
   # Create a data frame for x and split
