@@ -28,6 +28,7 @@ my_knn_cv <- function(train, cl, k_nn, k_cv) {
   # Remove any NA values from the input data
   train <- na.omit(train)
   predict_err <- rep(NA, k_cv)
+  print(train$split)
   # Iteration through 1:k_cv
   for (i in 1:k_cv) {
     train_data <- train %>%
