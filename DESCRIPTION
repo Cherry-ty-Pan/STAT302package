@@ -1,12 +1,16 @@
 Package: STAT302package
-Title: Pakcage Building
+Title: Stat 302 Project 3
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Cherry",
+    c(person(given = "Cherry",
            family = "Pan",
            role = c("aut", "cre"),
-           email = "pant3@uw.edu")
-Description: This package demonstrates package building.
+           email = "pant3@uw.edu"),
+    person(given = "Yi-Hsuan",
+           family = "Wu",
+           role = c("aut"),
+           email = "yhw3@uw.edu"))      
+Description: Demonstrates functions we’ve written throughout the class.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -20,3 +24,11 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
 VignetteBuilder: knitr
+Imports: 
+    class,
+    palmerpenguins,
+    randomForest,
+    magrittr,
+    dplyr,
+    gapminder,
+    tibble
