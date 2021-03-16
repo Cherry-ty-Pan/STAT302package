@@ -8,7 +8,7 @@ Authors@R:
            email = "pant3@uw.edu"),
     person(given = "Yi-Hsuan",
            family = "Wu",
-           role = c("aut", "cre"),
+           role = c("aut"),
            email = "yhw3@uw.edu"))      
 Description: This package demonstrates functions we’ve written throughout the class.
 License: GPL (>= 3)
