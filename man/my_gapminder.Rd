@@ -31,13 +31,13 @@ This data and documentation come from the \code{gapminder} package,
 available as \code{\link[gapminder]{gapminder}}.
 }
 \examples{
-str(gapminder)
-head(gapminder)
-summary(gapminder)
-table(gapminder$continent)
-aggregate(lifeExp ~ continent, gapminder, median)
-plot(lifeExp ~ year, gapminder, subset = country == "Cambodia", type = "b")
-plot(lifeExp ~ gdpPercap, gapminder, subset = year == 2007, log = "x")
+str(my_gapminder)
+head(my_gapminder)
+summary(my_gapminder)
+table(my_gapminder$continent)
+aggregate(lifeExp ~ continent, my_gapminder, median)
+plot(lifeExp ~ year, my_gapminder, subset = country == "Cambodia", type = "b")
+plot(lifeExp ~ gdpPercap, my_gapminder, subset = year == 2007, log = "x")
 
 if (require("dplyr")) {
 gapminder \%>\%
