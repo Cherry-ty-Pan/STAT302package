@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Cherry-ty-Pan/STAT302package/workflows/R-CMD-check/badge.svg)](https://github.com/Cherry-ty-Pan/STAT302package/actions)
+[![codecov](https://codecov.io/gh/Cherry-ty-Pan/STAT302package/branch/master/graph/badge.svg?token=JV3CIKE762)](https://codecov.io/gh/Cherry-ty-Pan/STAT302package)
 <!-- badges: end -->
 
 The goal of STAT302package is to ...
