@@ -1,0 +1,14 @@
+Package: STAT302package
+Title: Pakcage Building
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Cherry",
+           family = "Pan",
+           role = c("aut", "cre"),
+           email = "pant3@uw.edu")
+Description: This package demonstrates package building.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
