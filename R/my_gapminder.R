@@ -48,7 +48,7 @@
 #'   select(country, year, continent, lifeExp) %>%
 #'   mutate(le_delta = lifeExp - lag(lifeExp)) %>%
 #'   summarize(worst_le_delta = min(le_delta, na.rm = TRUE)) %>%
-#'   filter(min_rank(worst_le_delta) < 2) %>%
+#'   dplyr::filter(min_rank(worst_le_delta) < 2) %>%
 #'   arrange(worst_le_delta)
 #' }
 #'
