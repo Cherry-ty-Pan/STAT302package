@@ -28,4 +28,5 @@ Imports:
     class,
     palmerpenguins,
     randomForest,
-    magrittr
+    magrittr,
+    dplyr
