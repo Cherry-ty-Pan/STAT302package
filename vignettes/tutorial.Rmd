@@ -91,10 +91,17 @@ We don't have enough evidence to reject the null hypothesis.
 # `continent` as explanatory variables
 my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
 ```
+After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
 
-<<<<<<< HEAD
+Now, we will do a two sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that there will be no significant prediction of `lifeExp` by `gdpPercap`.
 
+  \begin{align}
+  H_0: \beta &= 0,\\
+  H_a: \beta &\neq 0.
+  \end{align}
 
+The p-value for the hypothesis test is `r p_val`, which is smaller than 0.05. The result is statistically significant and we have sufficient evidence to reject the null hypothesis. There will be significant prediction of `lifeExp` by `gdpPercap`.
+  
 
 
 =======
@@ -107,20 +114,23 @@ predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm
 
 For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
 ```{r}
-penguins <- na.omit(penguins)
+penguins <- na.omit(my_penguins)
 train_err <- rep(NA, 10)
 cv_err <- rep(NA, 10)
-name <- c("k_nn", "training error", "CV error")
+name <- c("k_nn", "Training error", "CV Error")
 for (i in 1:10) {
   test <- my_knn_cv(penguins[, 3:6], penguins$species, i, 5)
-  train_err[i] <- sum(penguins$species != test[[1]]) / nrow(penguins)
+  train_err[i] <- sum(penguins$species != test[[1]]) / nrow(my_penguins)
   cv_err[i] <- test[[2]]
 }
-record <- data.frame(c(1:10), train_err, cv_err)
-record
-}
-```
+record <- data.frame("k_nn" = c(1:10),
+                     "Training Error" = train_err,
+                     "CV Error" = cv_err)
+print(record)
 
+```
+Based on the table, I will "k_nn = 1" model becuase of "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
+Cross-validation is a model validation technique that assess how the results  will generalize to an independent data set. In practice, we want to choose the model that generates error as less as possible. 
 
 
 ## 5. Tutorial for `my_rf_cv`
