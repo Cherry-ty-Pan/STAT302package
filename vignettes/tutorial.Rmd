@@ -157,7 +157,7 @@ Cross-validation is a model validation technique that assess how the results  wi
 # Predict `body_mass_g` using covariates `bill_length_mm`, `bill_depth_mm`, and 
 # `flipper_length_mm` with `my_knn_cv` function and iterate through k in c(2, 5, 10)  
 # for 30 iterations each.
-# Save the iteration results as cv_2, cv_5 and cv_10 respectively.
+# Save the iteration results as `cv_2`, `cv_5` and `cv_10` respectively.
 cv_2 <- replicate(30, my_rf_cv(2))
 cv_5 <- replicate(30, my_rf_cv(5))
 cv_10 <- replicate(30, my_rf_cv(10))
