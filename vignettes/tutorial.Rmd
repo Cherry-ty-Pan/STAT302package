@@ -103,6 +103,7 @@ We will do a two-sided hypothesis test associated with the `gdpPercap` coefficie
   \end{align}
 
 The p-value for the hypothesis test is 8.553e-73, which is much smaller than 0.05. Thus the result is statistically significant and we have sufficient evidence to reject the null hypothesis. `gdpPercap` has significant influence on `lifeExp`.
+
 ```{r}
 # plot the Actual vs. Fitted values
 coef <- reg$Estimate[, 1]
@@ -117,9 +118,7 @@ ggplot(df, aes(x = actual, y = fitted, color = continent)) +
    labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
    theme(plot.title = element_text(hjust = 0.5))
 ```
-
-
-Based on the plot, we can tell that the model well predicts European countries. but has poor prediction on African countries.  
+Based on the plot, we can tell that the model well predictes European countries. but has poor prediction on African countries. 
 
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
@@ -143,7 +142,9 @@ record <- data.frame("k_nn" = c(1:10),
 record
 ```
 
-Based on the table, I will use "k_nn = 1" model because "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
+
+Based on the table, I will "k_nn = 1" model becuase of "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
+
 Cross-validation is a model validation technique that assess how the results  will generalize to an independent data set. In practice, we want to choose the model that generates error as less as possible. 
 
 
