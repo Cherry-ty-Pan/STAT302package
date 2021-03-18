@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/Cherry-ty-Pan/STAT302package/branch/master/graph/badge.svg?token=JV3CIKE762)](https://codecov.io/gh/Cherry-ty-Pan/STAT302package)
 <!-- badges: end -->
 
-This is the final project for STAT302. A package called "STAT302package" is created, and it includes four functions: `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv``.
+This is the final project for STAT302. A package called "STAT302package" is created, and it includes four functions: `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv`.
 package collaborators: Cherry Pan & Yi-Hsuan Wu.
 
 ## Installation
