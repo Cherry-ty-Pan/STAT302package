@@ -27,7 +27,6 @@ library(dplyr)
 library(gapminder)
 library(tibble)
 library(ggplot2)
-library(kableExtra)
 
 ```
 
