@@ -32,4 +32,4 @@ Imports:
     dplyr,
     gapminder,
     tibble,
-    tidyverse
+    ggplot2
