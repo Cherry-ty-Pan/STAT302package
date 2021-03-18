@@ -90,11 +90,11 @@ We don't have enough evidence to reject the null hypothesis.
 ```{r}
 # a regression using `lifeExp` as the response variable and `gdpPercap` and
 # `continent` as explanatory variables
-my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+reg <- my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+reg
 ```
 After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
 
-<<<<<<< HEAD
 We will do a two-sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that `gdpPercap` has no significant influence on `lifeExp`.
 
   \begin{align}
@@ -103,10 +103,20 @@ We will do a two-sided hypothesis test associated with the `gdpPercap` coefficie
   \end{align}
 
 The p-value for the hypothesis test is 8.553e-73, which is much smaller than 0.05. Thus the result is statistically significant and we have sufficient evidence to reject the null hypothesis. `gdpPercap` has significant influence on `lifeExp`.
-  
 
 ```{r}
-
+# plot the Actual vs. Fitted values
+coef <- reg[, 1]
+matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+df <- data.frame("actual" = my_gapminder$lifeExp, 
+                 "fitted" = matrix %*% as.matrix(coef), 
+                 "continent" = my_gapminder$continent)
+ggplot(df, aes(x = actual, y = fitted, color = continent)) +
+   geom_point() +
+   geom_smooth(method = "lm", se = FALSE) + 
+   theme_bw(base_size = 15) +
+   labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
+   theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
