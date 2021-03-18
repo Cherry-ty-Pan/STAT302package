@@ -118,6 +118,10 @@ ggplot(df, aes(x = actual, y = fitted, color = continent)) +
    labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
    theme(plot.title = element_text(hjust = 0.5))
 ```
+Based on the plot, we can tell that the model well predictes European countries. but has poor prediction on African countries. 
+
+
+
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
 predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g` with 5-fold cross validation (`k_cv = 5`)
@@ -139,7 +143,6 @@ record <- data.frame("k_nn" = c(1:10),
 record
 ```
 
-```
 Based on the table, I will "k_nn = 1" model becuase of "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
 Cross-validation is a model validation technique that assess how the results  will generalize to an independent data set. In practice, we want to choose the model that generates error as less as possible. 
 
