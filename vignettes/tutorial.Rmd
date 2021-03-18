@@ -93,14 +93,14 @@ my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
 ```
 After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
 
-Now, we will do a two sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that there will be no significant prediction of `lifeExp` by `gdpPercap`.
+We will do a two-sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that `gdpPercap` has no significant influence on `lifeExp`.
 
   \begin{align}
   H_0: \beta &= 0,\\
   H_a: \beta &\neq 0.
   \end{align}
 
-The p-value for the hypothesis test is `r p_val`, which is smaller than 0.05. The result is statistically significant and we have sufficient evidence to reject the null hypothesis. There will be significant prediction of `lifeExp` by `gdpPercap`.
+The p-value for the hypothesis test is 8.553e-73, which is much smaller than 0.05. Thus the result is statistically significant and we have sufficient evidence to reject the null hypothesis. `gdpPercap` has significant influence on `lifeExp`.
   
 
 
