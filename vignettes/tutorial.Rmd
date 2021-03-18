@@ -60,7 +60,8 @@ Use the `lifeExp` data from `my_gapminder` for the following tests
 ```{r}
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```
-
+In this case, p-value is 0.093, which is greater than 0.05. Thus the result is not statistically significant.
+We don't have enough evidence to reject the null hypothesis.
 
 ### Case II: alternative = "less"
   \begin{align}
@@ -71,7 +72,8 @@ my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```{r}
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "less")
 ```
-
+In this case, p-value is 0.047, which is less than 0.05. Thus the result is statistically significant.
+We do have enough evidence to reject the null hypothesis. 
 
 ### case III: alternative = "greater"
   \begin{align}
@@ -81,7 +83,8 @@ my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "less")
 ```{r}
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
 ```
-
+In this case, p-value is 0.0953, which is greater than 0.05. Thus the result is not statistically significant.
+We don't have enough evidence to reject the null hypothesis.
 
 ## 3. Tutorial for `my_lm`
 ```{r}
