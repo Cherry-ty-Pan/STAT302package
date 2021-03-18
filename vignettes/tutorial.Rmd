@@ -57,7 +57,7 @@ Use the `lifeExp` data from `my_gapminder` for the following tests
   \end{align}
   
 ```{r}
-my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
+my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```
 
 
@@ -68,7 +68,7 @@ my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
   \end{align}
   
 ```{r}
-my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "less")
+my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "less")
 ```
 
 
@@ -78,12 +78,14 @@ my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "less")
   H_a: \mu &> 60.
   \end{align}
 ```{r}
-my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
+my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
 ```
 
 
 ## 3. Tutorial for `my_lm`
 ```{r}
+# a regression using `lifeExp` as the response variable and `gdpPercap` and
+# `continent` as explanatory variables
 my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
 ```
 
@@ -92,6 +94,17 @@ my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
 ```
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
+predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g` with 5-fold cross validation (`k_cv = 5`)
+
+For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
+```{r}
+record <- matrix(NA, nrow = 10, ncol = 3)
+for (i in 1:10) {
+  record[i, 1] <- i
+ 
+}
+```
+
 
 
 ## 5. Tutorial for `my_rf_cv`
