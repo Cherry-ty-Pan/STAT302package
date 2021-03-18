@@ -58,6 +58,7 @@ Use the `lifeExp` data from `my_gapminder` for the following tests
   \end{align}
   
 ```{r}
+# perform t-test with the alternative = two.sided
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```
 In this case, p-value is 0.093, which is greater than 0.05. Thus the result is not statistically significant.
@@ -70,6 +71,7 @@ We don't have enough evidence to reject the null hypothesis.
   \end{align}
   
 ```{r}
+# perform t-test with the alternative = less
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "less")
 ```
 In this case, p-value is 0.047, which is less than 0.05. Thus the result is statistically significant.
@@ -81,26 +83,30 @@ We do have enough evidence to reject the null hypothesis.
   H_a: \mu &> 60.
   \end{align}
 ```{r}
+# perform t-test with the alternative = greater
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
 ```
 In this case, p-value is 0.0953, which is greater than 0.05. Thus the result is not statistically significant.
 We don't have enough evidence to reject the null hypothesis.
 
 ## 3. Tutorial for `my_lm`
-```{r}
+```{r, warning=FALSE}
 # a regression using `lifeExp` as the response variable and `gdpPercap` and
 # `continent` as explanatory variables
 reg <- my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
 coef <- reg$Estimate[, 1]
 matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
-y_hat <- matrix %*% as.matrix(coef)
-df <- data.frame("actual" = my_gapminder$lifeExp, "fitted" = y_hat, "continent" = my_gapminder$continent)
+# store actual values and fitted values to a data frame
+df <- data.frame("actual" = my_gapminder$lifeExp, 
+                 "fitted" = matrix %*% as.matrix(coef), 
+                 "continent" = my_gapminder$continent)
+# plot the Actual vs. Fitted values graph
 ggplot(df, aes(x = actual, y = fitted, color = continent)) +
    geom_point() +
-   geom_abline(slope = 1, intercept = 0, col = "black") + 
    theme_bw(base_size = 15) +
    labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
-   theme(plot.title = element_text(hjust = 0.5))
+   theme(plot.title = element_text(hjust = 0.5)) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = 1))
 ```
 
 After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
@@ -116,19 +122,22 @@ The p-value for the hypothesis test is 8.553e-73, which is much smaller than 0.0
   
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
-predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g` with 5-fold cross validation (`k_cv = 5`)
 
-For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
 ```{r}
+# Predict output class species using covariates `bill_length_mm`, `bill_depth_mm`, 
+# `flipper_length_mm`, and `body_mass_g`.
+# omit all the NA in my_penguins
 my_penguins <- na.omit(my_penguins)
 train_err <- rep(NA, 10)
 cv_err <- rep(NA, 10)
 name <- c("k_nn", "Training error", "CV Error")
+# store training errors and CV errors
 for (i in 1:10) {
   test <- my_knn_cv(my_penguins[, 3:6], my_penguins$species, 1, 5)
   train_err[i] <- sum(my_penguins$species != test[[1]]) / nrow(my_penguins)
   cv_err[i] <- test[[2]]
 }
+# record the training error and CV error
 record <- data.frame("k_nn" = c(1:10), 
                      "Training Error" = train_err, 
                      "CV Error" = cv_err)
@@ -142,7 +151,10 @@ Cross-validation is a model validation technique that assess how the results  wi
 ## 5. Tutorial for `my_rf_cv`
 ```{r my_rf_cv}
 
-# run functions for 30 times with k = 2, 5, 10.
+# Predict `body_mass_g` using covariates `bill_length_mm`, `bill_depth_mm`, and 
+# `flipper_length_mm` with `my_knn_cv` function and iterate through k in c(2, 5, 10)  
+# for 30 iterations each.
+# Save the iteration results as cv_2, cv_5 and cv_10 respectively.
 cv_2 <- replicate(30, my_rf_cv(2))
 cv_5 <- replicate(30, my_rf_cv(5))
 cv_10 <- replicate(30, my_rf_cv(10))
@@ -154,7 +166,7 @@ cv_plot <- ggplot(cv_df, aes(factor(k), cv)) +
   geom_boxplot() +
   labs(x = c("k"), y = c("CV estimated MSE"))
 cv_plot
-# Display table with 
+# Display the statistics of the results as a table
 cv_table <- data.frame("k" = c(2, 5, 10),
                        "Mean" = c(mean(cv_2),mean(cv_5),mean(cv_10)),
                        "Standard Deviation" = c(sd(cv_2),sd(cv_5),sd(cv_10)))
