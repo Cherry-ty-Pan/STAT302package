@@ -31,5 +31,4 @@ Imports:
     magrittr,
     dplyr,
     gapminder,
-    tibble,
-    tidyverse
+    tibble

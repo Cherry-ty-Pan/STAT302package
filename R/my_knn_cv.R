@@ -20,11 +20,10 @@
 #' @export
 my_knn_cv <- function(train, cl, k_nn, k_cv) {
   # Define fold
-  fold <- sample(rep(1:k_cv, length = nrow(train)))
   # Create a data frame for x and split
   train <- data.frame("x" = train,
                       "y" = cl,
-                      "split" = fold)
+                      "split" = sample(rep(1:k_cv, length = nrow(train))))
   # Remove any NA values from the input data
   train <- na.omit(train)
   predict_err <- rep(NA, k_cv)

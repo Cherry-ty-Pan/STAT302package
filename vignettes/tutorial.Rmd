@@ -16,9 +16,10 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
+# Attach libraries used for this part of tutorial
+library(ggplot2)
+library(kableExtra)
 library(STAT302package)
-library(tidyverse)
-library(devtools)
 library(class)
 library(palmerpenguins)
 library(randomForest)
@@ -33,7 +34,7 @@ library(tibble)
 ## 1. Introduction
 
 This is the final project for STAT302. A package called "STAT302package" is created, and it includes four functions: `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv``.
-package collabrator: Cherry Pan & Yi-Hsuan Wu.
+package collaborators: Cherry Pan & Yi-Hsuan Wu.
 
 The guide to install the package:
 ```{r, eval = FALSE}
@@ -57,10 +58,6 @@ Use the `lifeExp` data from `my_gapminder` for the following tests
   \end{align}
   
 ```{r}
-<<<<<<< HEAD
-=======
-my_gapminder
->>>>>>> 9c926a8e17495777014759899ba6dc03d3c1d44c
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```
 
@@ -90,15 +87,9 @@ my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
 ```{r}
 # a regression using `lifeExp` as the response variable and `gdpPercap` and
 # `continent` as explanatory variables
-my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
+my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
 ```
 
-<<<<<<< HEAD
-
-
-
-
-=======
 ```{r}
 
 ```
@@ -108,29 +99,26 @@ predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm
 
 For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
 ```{r}
-penguins <- na.omit(penguins)
+my_penguins <- na.omit(my_penguins)
 train_err <- rep(NA, 10)
 cv_err <- rep(NA, 10)
 name <- c("k_nn", "training error", "CV error")
 for (i in 1:10) {
-  test <- my_knn_cv(penguins[, 3:6], penguins$species, i, 5)
-  train_err[i] <- sum(penguins$species != test[[1]]) / nrow(penguins)
+  test <- my_knn_cv(my_penguins[, 3:6], my_penguins$species, 1, 5)
+  train_err[i] <- sum(my_penguins$species != test[[1]]) / nrow(my_penguins)
   cv_err[i] <- test[[2]]
 }
-record <- data.frame(c(1:10), train_err, cv_err)
-print(record)
-}
+record <- data.frame("k_nn" = c(1:10), 
+                     "Training Error" = train_err, 
+                     "CV Error" = cv_err)
+kable_styling(kable(record))
 ```
 
 
 
 ## 5. Tutorial for `my_rf_cv`
 ```{r my_rf_cv}
-# Attach libraries used for this part of tutorial
-library(dplyr)
-library(randomForest)
-library(ggplot2)
-library(kableExtra)
+
 # run functions for 30 times with k = 2, 5, 10.
 cv_2 <- replicate(30, my_rf_cv(2))
 cv_5 <- replicate(30, my_rf_cv(5))
