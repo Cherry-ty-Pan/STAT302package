@@ -57,6 +57,10 @@ Use the `lifeExp` data from `my_gapminder` for the following tests
   \end{align}
   
 ```{r}
+<<<<<<< HEAD
+=======
+my_gapminder
+>>>>>>> 9c926a8e17495777014759899ba6dc03d3c1d44c
 my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
 ```
 
@@ -89,6 +93,12 @@ my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
 my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
 ```
 
+<<<<<<< HEAD
+
+
+
+
+=======
 ```{r}
 
 ```
@@ -98,14 +108,49 @@ predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm
 
 For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
 ```{r}
-record <- matrix(NA, nrow = 10, ncol = 3)
+penguins <- na.omit(penguins)
+train_err <- rep(NA, 10)
+cv_err <- rep(NA, 10)
+name <- c("k_nn", "training error", "CV error")
 for (i in 1:10) {
-  record[i, 1] <- i
- 
+  test <- my_knn_cv(penguins[, 3:6], penguins$species, i, 5)
+  train_err[i] <- sum(penguins$species != test[[1]]) / nrow(penguins)
+  cv_err[i] <- test[[2]]
+}
+record <- data.frame(c(1:10), train_err, cv_err)
+print(record)
 }
 ```
 
 
 
 ## 5. Tutorial for `my_rf_cv`
-
+```{r my_rf_cv}
+# Attach libraries used for this part of tutorial
+library(dplyr)
+library(randomForest)
+library(ggplot2)
+library(kableExtra)
+# run functions for 30 times with k = 2, 5, 10.
+cv_2 <- replicate(30, my_rf_cv(2))
+cv_5 <- replicate(30, my_rf_cv(5))
+cv_10 <- replicate(30, my_rf_cv(10))
+# Store results as a data frame
+cv_df <- data.frame("k" = c(rep(2,30),rep(5,30), rep(10,30)),
+                 "cv" = c(cv_2,cv_5,cv_10))
+# Plot the results as a boxplot
+cv_plot <- ggplot(cv_df, aes(factor(k), cv)) +
+  geom_boxplot() +
+  labs(x = c("k"), y = c("CV estimated MSE"))
+cv_plot
+# Display table with 
+cv_table <- data.frame("k" = c(2, 5, 10),
+                       "Mean" = c(mean(cv_2),mean(cv_5),mean(cv_10)),
+                       "Standard Deviation" = c(sd(cv_2),sd(cv_5),sd(cv_10)))
+kable_styling(kable(cv_table))
+                       
+```
+From the boxplot, it's observed that CV estimated MSE has greatest mean when k = 2,
+which is above 120000. However, by inspecting the table, we can see standard deviation
+of CV estimated MSE is greatest when k = 10. The reason may be due to that 2 folds 
+yield  greatest MSE and 5 folds yield greatest variance in this data set.
