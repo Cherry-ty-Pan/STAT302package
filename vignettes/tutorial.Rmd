@@ -102,6 +102,7 @@ ggplot(df, aes(x = actual, y = fitted, color = continent)) +
    labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
    theme(plot.title = element_text(hjust = 0.5))
 ```
+
 After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
 
 We will do a two-sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that `gdpPercap` has no significant influence on `lifeExp`.
