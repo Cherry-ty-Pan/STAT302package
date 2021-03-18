@@ -91,9 +91,18 @@ We don't have enough evidence to reject the null hypothesis.
 # a regression using `lifeExp` as the response variable and `gdpPercap` and
 # `continent` as explanatory variables
 reg <- my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+coef <- reg$Estimate[, 1]
+matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+y_hat <- matrix %*% as.matrix(coef)
+df <- data.frame("actual" = my_gapminder$lifeExp, "fitted" = y_hat, "continent" = my_gapminder$continent)
+ggplot(df, aes(x = actual, y = fitted, color = continent)) +
+   geom_point() +
+   geom_abline(slope = 1, intercept = 0, col = "black") + 
+   theme_bw(base_size = 15) +
+   labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
+   theme(plot.title = element_text(hjust = 0.5))
 ```
-
-After comparing the coefficients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
+After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
 
 We will do a two-sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that `gdpPercap` has no significant influence on `lifeExp`.
 
@@ -103,29 +112,12 @@ We will do a two-sided hypothesis test associated with the `gdpPercap` coefficie
   \end{align}
 
 The p-value for the hypothesis test is 8.553e-73, which is much smaller than 0.05. Thus the result is statistically significant and we have sufficient evidence to reject the null hypothesis. `gdpPercap` has significant influence on `lifeExp`.
-
-```{r}
-# plot the Actual vs. Fitted values
-coef <- reg$Estimate[, 1]
-matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
-df <- data.frame("actual" = my_gapminder$lifeExp, 
-                 "fitted" = matrix %*% as.matrix(coef), 
-                 "continent" = my_gapminder$continent)
-ggplot(df, aes(x = actual, y = fitted, color = continent)) +
-   geom_point() +
-   geom_smooth(method = "lm", se = FALSE) + 
-   theme_bw(base_size = 15) +
-   labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") + 
-   theme(plot.title = element_text(hjust = 0.5))
-```
-Based on the plot, we can tell that the model well predictes European countries. but has poor prediction on African countries. 
-
+  
 
 ## 4. Tutorial for `my_knn_cv` using `my_penguins`
 predict output class `species` using covariates `bill_length_mm`, `bill_depth_mm`, `flipper_length_mm`, and `body_mass_g` with 5-fold cross validation (`k_cv = 5`)
 
 For each value of `k_nn`, record the training misclassification rate and the CV misclassification rate (output from the function)
-
 ```{r}
 my_penguins <- na.omit(my_penguins)
 train_err <- rep(NA, 10)
@@ -142,9 +134,7 @@ record <- data.frame("k_nn" = c(1:10),
 record
 ```
 
-
 Based on the table, I will "k_nn = 1" model becuase of "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
-
 Cross-validation is a model validation technique that assess how the results  will generalize to an independent data set. In practice, we want to choose the model that generates error as less as possible. 
 
 
