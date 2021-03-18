@@ -16,9 +16,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-# Attach libraries used for this part of tutorial
-library(ggplot2)
-library(kableExtra)
+# Attach libraries used for this tutorial
+
 library(STAT302package)
 library(class)
 library(palmerpenguins)
@@ -27,6 +26,8 @@ library(magrittr)
 library(dplyr)
 library(gapminder)
 library(tibble)
+library(ggplot2)
+library(kableExtra)
 
 ```
 
