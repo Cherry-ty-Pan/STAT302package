@@ -94,6 +94,7 @@ We don't have enough evidence to reject the null hypothesis.
 # a regression using `lifeExp` as the response variable and `gdpPercap` and
 # `continent` as explanatory variables
 reg <- my_lm(lifeExp ~ gdpPercap + continent, data = my_gapminder)
+reg
 coef <- reg$Estimate[, 1]
 matrix <- model.matrix(lifeExp ~ gdpPercap + continent, data = my_gapminder)
 # store actual values and fitted values to a data frame
@@ -109,7 +110,9 @@ ggplot(df, aes(x = actual, y = fitted, color = continent)) +
   geom_smooth(method = "lm", se = FALSE, aes(group = 1))
 ```
 
-After comparing the coeffiecients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
+After comparing the coefficients of different continents, we can tell that the `continent` has more influence on `lifeExp` than `gdpPercap`
+
+Here, the `gdpPercap` coefficient is 4.452704e-04, meaning that the expected difference in the `lifeExp` between two observations differing by one unit in `gdpPercap` is 4.452704e-04, with all other covariates identical.
 
 We will do a two-sided hypothesis test associated with the `gdpPercap` coefficient. The null hypothesis is that `gdpPercap` has no significant influence on `lifeExp`.
 
@@ -144,7 +147,7 @@ record <- data.frame("k_nn" = c(1:10),
 record
 ```
 
-Based on the table, I will "k_nn = 1" model becuase of "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
+Based on the table, I will use "k_nn = 1" model because "k_nn = 1" model has the least error rate in both training misclassification rate and error misclassification rate. 
 Cross-validation is a model validation technique that assess how the results  will generalize to an independent data set. In practice, we want to choose the model that generates error as less as possible. 
 
 
