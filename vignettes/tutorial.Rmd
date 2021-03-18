@@ -17,9 +17,91 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(STAT302package)
+library(tidyverse)
+library(devtools)
+library(class)
+library(palmerpenguins)
+library(randomForest)
+library(magrittr)
+library(dplyr)
+library(gapminder)
+library(tibble)
+
 ```
 
 
+## 1. Introduction
+
+This is the final project for STAT302. A package called "STAT302package" is created, and it includes four functions: `my_t_test`, `my_lm`, `my_knn_cv`, and `my_rf_cv``.
+package collabrator: Cherry Pan & Yi-Hsuan Wu.
+
+The guide to install the package:
+```{r, eval = FALSE}
+devtools::install_github("Cherry-ty-Pan/STAT302package", build_vignette = TRUE, build_opts = c())
+library(STAT302package)
+# Use this to view the vignette in the Demo HTML help
+help(package = "STAT302package", help_type = "html")
+# Use this to view the vignette as an isolated HTML file
+utils::browseVignettes(package = "STAT302package")
+```
+
+
+## 2. Tutorial for `my_t.test`
+
+Use the `lifeExp` data from `my_gapminder` for the following tests
+
+### Case I: alternative = "two.sided"
+ \begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &\neq 60.
+  \end{align}
+  
+```{r}
+my_gapminder
+my_t.test(my_gapminder$lifeExp, mu = 60, alternative = "two.sided")
+```
+
+
+### Case II: alternative = "less"
+  \begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &< 60.
+  \end{align}
+  
+```{r}
+my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "less")
+```
+
+
+### case III: alternative = "greater"
+  \begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &> 60.
+  \end{align}
+```{r}
+my_t_test(my_gapminder$lifeExp, mu = 60, alternative = "greater")
+```
+
+
+## 3. Tutorial for `my_lm`
+```{r}
+my_lm(lifeEx ~ gdpPercap + continent, data = my_gapminder)
+```
+
+<<<<<<< HEAD
+
+
+
+
+=======
+```{r}
+
+```
+
+## 4. Tutorial for `my_knn_cv` using `my_penguins`
+
+
+## 5. Tutorial for `my_rf_cv`
 ```{r my_rf_cv}
 # Attach libraries used for this part of tutorial
 library(dplyr)
@@ -45,9 +127,7 @@ cv_table <- data.frame("k" = c(2, 5, 10),
 kable_styling(kable(cv_table))
                        
 ```
-
 From the boxplot, it's observed that CV estimated MSE has greatest mean when k = 2,
 which is above 120000. However, by inspecting the table, we can see standard deviation
 of CV estimated MSE is greatest when k = 10. The reason may be due to that 2 folds 
 yield  greatest MSE and 5 folds yield greatest variance in this data set.
-
